@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+<script>
+var total_size_of_array;
+function heap(array, x) {
+    var l = 2 * x + 1;
+    var r = 2 * x + 2;
+    var largest = x;
+
+    if (l < total_size_of_array && array[l] > array[largest]) 
+    {
+        largest = l;
+    }
+
+    if (r < total_size_of_array && array[r] > array[largest])     
+    {
+        largest = r;
+    }
+
+    if (largest != x) 
+    {
+        change_position(array, x, largest);
+        heap(array, largest);
+    }
+}
+function change_position(array, y, x) 
+{
+    var temporary = array[y];
+    array[y] = array[x];
+    array[x] = temporary;
+}
+function heap_sorting_function(array) 
+{
+    
+    total_size_of_array = array.length;
+    for (var x = Math.floor(total_size_of_array / 2); x >= 0; x -= 1)      
+    {
+        heap(array, x);
+    }
+    for (x = array.length - 1; x > 0; x--) 
+    {
+        change_position(array, 0, x);
+        total_size_of_array--;
+      
+        heap(array, 0);
+    }
+}
+var array = [3, 10, 2, 15, -2, 24, 11];
+heap_sorting_function(array);
+document.write(array);
+</script>
+</body>
+</html>
